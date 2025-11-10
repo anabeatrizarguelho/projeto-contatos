@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Adicionar Contato</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-input 
+        label="Nome" 
+        labelPlacement="floating" 
+        [(ngModel)]="contato.nome" 
+        placeholder="Digite o nome">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input 
+        label="Email" 
+        labelPlacement="floating" 
+        [(ngModel)]="contato.email" 
+        placeholder="Digite o email" 
+        type="email">
+      </ion-input>
+    </ion-item>
+  </ion-list>
+
+  <div class="ion-padding">
+    <ion-button expand="block" (click)="adicionarContato()">
+      Adicionar Contato
+    </ion-button>
+  </div>
+  
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <h2>Contatos salvos</h2>
+        <p *ngIf="contatos.length === 0">Nenhum contato salvo ainda.</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngFor="let c of contatos">
+      <ion-label>
+        <h3>{{ c.nome || c.name }}</h3>
+        <p>{{ c.email || '-' }}</p>
+      </ion-label>
+      <ion-button slot="end" color="danger" (click)="deletarContato(c.id)">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+  </ion-list>
+
+  <div>
+    <ion-button shape="round" [routerLink]="['/home']" class="ion-padding">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+  </div>
+  
+</ion-content>
